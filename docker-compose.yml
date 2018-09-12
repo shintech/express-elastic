@@ -1,0 +1,23 @@
+version: '3'
+
+services: 
+  express-elastic:
+    build: .
+    image: shintech/express-elastic:latest
+    container_name: express-elastic
+    env_file:
+      - ./express.env
+    ports:
+      - "8000:8000"
+    restart: always
+    links:
+      - elastic
+    
+  elastic:
+    image: elasticsearch:latest
+    container_name: elasticsearch
+    env_file:
+        - ./elastic.env
+    restart: always
+    # volumes:
+      # - ./data/db:/var/lib/postgresql/data    
