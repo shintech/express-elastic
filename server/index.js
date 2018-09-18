@@ -1,32 +1,23 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
 const compression = require('compression')
 const morgan = require('morgan')
-const configRouter = require('./router')
-const configClient = require('./client')
+const Router = require('./router')
+const configDB = require('./db')
 
-const environment = process.env['NODE_ENV'] || 'development'
-const port = process.env['PORT'] || 8000
+module.exports = ({ logger, port, environment }) => {
+  const server = express()
+  const db = configDB({ logger, environment })
+  const api = Router({ db, logger })
 
-const logger = require('./logger')({ environment })
+  if (environment === 'development') server.use(morgan('dev'))
 
-const app = express()
-const client = configClient({ logger })
+  server.use('/public', express.static(path.join(__dirname, '../public')))
+    .use(bodyParser.urlencoded({ extended: true }))
+    .use(bodyParser.json())
+    .use(compression())
+    .use('/api', api)
 
-if (environment === 'development') app.use(morgan('dev'))
-
-app.use('/api/*', (req, res, next) => {
-  req.client = client
-  next()
-})
-
-app.use(bodyParser.urlencoded({ extended: true }))
-  .use(bodyParser.json())
-  .use(compression())
-  .use('/api', configRouter({ logger }))
-
-app.listen(port, () => {
-  logger.info(`listening on ${port}...`)
-})
-
-module.exports = app
+  return server
+}

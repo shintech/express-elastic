@@ -19,5 +19,5 @@ services:
     env_file:
         - ./elastic.env
     restart: always
-    # volumes:
-      # - ./data/db:/var/lib/postgresql/data    
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data

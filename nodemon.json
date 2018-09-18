@@ -1,5 +1,5 @@
 {
-  "watch": ["server"],
+  "watch": ["server", "index.js"],
   "ignore": [],
   "ext": "js,json"
 }
