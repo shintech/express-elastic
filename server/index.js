@@ -4,11 +4,9 @@ const path = require('path')
 const compression = require('compression')
 const morgan = require('morgan')
 const Router = require('./router')
-const configDB = require('./db')
 
-module.exports = ({ logger, port, environment }) => {
+module.exports = ({ db, logger, port, environment }) => {
   const server = express()
-  const db = configDB({ logger, environment })
   const api = Router({ db, logger })
 
   if (environment === 'development') server.use(morgan('dev'))

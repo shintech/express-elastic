@@ -2,9 +2,11 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const environment = process.env['NODE_ENV']
 const port = process.env['PORT'] || 8000
+const configDB = require('../server/db')
 
 const logger = require('../server/logger')({ environment })
-const server = require('../server')({ logger, environment, port })
+const db = configDB({ logger, environment })
+const server = require('../server')({ db, logger, environment, port })
 
 chai.use(chaiHttp)
 const expect = chai.expect
