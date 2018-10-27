@@ -1,7 +1,9 @@
 const router = require('express').Router()
 
-module.exports = function ({ db }) {
+module.exports = function () {
   router.get('/search', (req, res) => {
+    const { db } = req
+
     db.search({
       index: 'inventory',
       type: 'device',
@@ -26,6 +28,8 @@ module.exports = function ({ db }) {
   })
 
   router.get('/inventory', (req, res) => {
+    const { db } = req
+
     db.search({
       index: 'inventory',
       type: 'device',
@@ -46,6 +50,8 @@ module.exports = function ({ db }) {
   })
 
   router.post('/inventory', async (req, res) => {
+    const { db } = req
+
     let response = await db.index({
       index: 'inventory',
       type: 'device',
