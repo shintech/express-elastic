@@ -768,6 +768,10 @@ setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
 
+shintech-logger@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/shintech-logger/-/shintech-logger-0.0.1.tgz#09998f1bb7c497c0519164f82b0bd8e7e78a86da"
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
